@@ -8,7 +8,7 @@ function moduleProject3() {
 
     links.forEach(link => {
       const { href, textContent, title } = link
-      const  newLink = document.createElement('a')
+      const newLink = document.createElement('a')
       newLink.title = title
       newLink.href = href
       newLink.textContent = textContent
@@ -32,9 +32,44 @@ function moduleProject3() {
 
   function buildLearnerCard(learner, languages) {
     //  ✨ do your magic here
-  }
+
+      const card = document.createElement('div')
+      card.classList.add('learner-card')
+
+      const name = document.createElement('p')
+      const learnerId = document.createElement('p')
+      const dob = document.createElement('p')
+      const favLang = document.createElement('p')
+
+      name.textContent = learner.fullName
+      learnerId.textContent = `Learner ID: ${learner.id}`
+      dob.textContent = `Date of Birth: ${learner.dateOfBirth}`
+
+      const favoriteLanguage = languages.find(lang => lang.id === learner.favLanguage)
+      favLang.textContent = `Favorite Language: ${favoriteLanguage.name}`
+
+      card.append(name, learnerId, dob, favLang)
+
+      card.addEventListener('click', () => {
+        const cards = Array.from(document.querySelector('section').children)
+        const active = cards.find(card => card.classList.contains('active'));
+        
+        if (active) {
+          active.classList.remove('active')
+        }
+
+        card.classList.add('active')
+      
+        
+      })
+      
+      return card
+    }
+
 
   {
+
+
     // 👉 TASK 2B - Use the two variables below to make learner Cards, and put them in the DOM
 
     let languages = [
@@ -52,13 +87,48 @@ function moduleProject3() {
       { id: 17, fullName: 'Daniel Castillo', dateOfBirth: '1995-11-05', favLanguage: 12 }
     ]
     //  ✨ do your magic here
+    function addLearnerCards(learners, languages) {
+      const section = document.querySelector('section');
+      learners.forEach(learner => {
+          const card = buildLearnerCard(learner, languages);
+          section.appendChild(card);
+      })
+    
   }
+  addLearnerCards(learners, languages);
+}
+
+  
+
+  
+    
+  
+
 
   // 👉 TASK 3 - Write a `buildFooter` component that returns a footer
 
   function buildFooter(footerData) {
     //  ✨ do your magic here
-    return document.createElement('footer')
+    const currentYear = new Date().getFullYear().toString()
+    const footer = document.createElement('footer')
+
+    const companyInfo = document.createElement('div')
+      const companyName = document.createElement('p')
+      companyName.textContent = 'wip'
+      const address = document.createElement('p')
+      address.textContent = 'wip'
+      const contactEmail = document.createElement('p')
+        const emailHref = document.createElement('a')
+
+    const socialMedia = document.createElement('div')
+
+    const watermark = document.createElement('div')
+    watermark.textContent = `© BLOOM INSTITUTE OF TECHNOLOGY ${currentYear}`
+
+    document.body.append(footer)
+    contactEmail.appendChild(emailHref)
+    companyInfo.append(companyName, address, contactEmail)
+    footer.append(companyInfo, watermark)
   }
 
   // ❗ DOM creation using your `buildFooter` component (do not change):
