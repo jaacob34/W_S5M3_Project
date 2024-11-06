@@ -113,22 +113,47 @@ function moduleProject3() {
     const footer = document.createElement('footer')
 
     const companyInfo = document.createElement('div')
+    companyInfo.classList.add('company-info')
+
       const companyName = document.createElement('p')
-      companyName.textContent = 'wip'
+      companyName.classList.add('company-name')
+      companyName.textContent = footerData.companyName
+
       const address = document.createElement('p')
-      address.textContent = 'wip'
+      address.classList.add('address')
+      address.textContent = footerData.address
+
       const contactEmail = document.createElement('p')
+      contactEmail.classList.add('contact-email')
+      contactEmail.textContent = 'Email: '
         const emailHref = document.createElement('a')
+        emailHref.href = `mailto:${footerData.contactEmail}`
+        emailHref.textContent = footerData.contactEmail
 
     const socialMedia = document.createElement('div')
+    socialMedia.classList.add('social-media')
+
+      const twitter = document.createElement('a')
+      twitter.href = footerData.socialMedia.twitter
+      twitter.textContent = 'Twitter'
+
+      const facebook = document.createElement('a')
+      facebook.href = footerData.socialMedia.facebook
+      facebook.textContent = 'Facebook'
+
+      const instagram = document.createElement('a')
+      instagram.href = footerData.socialMedia.instagram
+      instagram.textContent = 'Instagram'
 
     const watermark = document.createElement('div')
-    watermark.textContent = `© BLOOM INSTITUTE OF TECHNOLOGY ${currentYear}`
+    watermark.textContent = `© ${footerData.companyName.toUpperCase()} ${currentYear}`
 
-    document.body.append(footer)
     contactEmail.appendChild(emailHref)
+    socialMedia.append(twitter, facebook, instagram)
     companyInfo.append(companyName, address, contactEmail)
-    footer.append(companyInfo, watermark)
+    footer.append(companyInfo, socialMedia, watermark)
+
+    return footer
   }
 
   // ❗ DOM creation using your `buildFooter` component (do not change):
@@ -146,6 +171,12 @@ function moduleProject3() {
   // 👉 TASK 4 - Clicking on the section should deactivate the active card
 
   //  ✨ do your magic here
+  document.addEventListener('click', evt => {
+    if (evt.target === document.querySelector('section')) {
+      const learners = document.querySelectorAll('.learner-card')
+      learners.forEach(card => card.classList.remove('active'))
+    }
+  })
 }
 
 // ❗ DO NOT CHANGE THIS CODE
